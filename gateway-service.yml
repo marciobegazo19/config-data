@@ -1,0 +1,23 @@
+server:
+  port: 1821
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka/
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: plantilla-service
+          uri: lb://plantilla-service
+          predicates:
+            - Path=/plantilla/**
+        - id: plantillados-service
+          uri: lb://plantillados-service
+          predicates:
+            - Path=/plantillados/**
